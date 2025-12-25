@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    color: #fff;
+    background-color: #ff0000;
+
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 5rem 1rem;
+    position: fixed;
+}
+
+.container-2 {
+    display: flex;
+    gap: .70rem;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.year-text-d {
+    font-size: 2rem;
+}
+
+.year-text {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.year-text::after {
+    content: "";
+    border: 2px solid #fff;
+    margin-left: 10px;
+}
+
+.description {
+    font-size: 1.2rem;
+}
+
+.time-container {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-container h2 {
+    font-size: 3rem;
+}
+
+.container-2 {
+    .year-text {
+        animation: slide-right .9s ease forwards;
+    }
+
+    .year-text-d {
+        animation: slide-left .9s ease forwards;
+    }
+}
+
+.description {
+    animation: slide-bottom .9s ease forwards;
+}
+
+.time-container .time {
+    animation: slide-bottom .9s ease forwards;
+}
+
+.time-container .time:nth-child(1) {
+    animation-duration: 300ms;
+}
+
+.time-container .time:nth-child(2) {
+    animation-duration: 600ms;
+}
+
+.time-container .time:nth-child(3) {
+    animation-duration: 900ms;
+}
+
+.time-container .time:nth-child(4) {
+    animation-duration: 1300ms;
+}
+
+@keyframes slide-right {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes slide-left {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes slide-bottom {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+
+    p {
+        font-size: .95rem;
+        opacity: .6;
+    }
+}
+
+.new-year-text {
+    display: none;
+    text-align: center;
+    font-size: 1.4rem;
+    max-width: 400px;
+
+    span {
+        color: #0fee0f;
+        font-weight: bold;
+    }
+}
+
+@media (width < 420px) {
+    .year-text {
+        font-size: 3rem;
+    }
+
+    .time-container h2 {
+        font-size: 2rem;
+    }
+
+    .time-container {
+        gap: 2rem;
+    }
+
+    .year-text-d {
+        font-size: 1.5rem;
+    }
+}
