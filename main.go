@@ -4,15 +4,17 @@ import (
 	"os"
 	"log"
 	"net/http"
+	"github.com/Cristiano67867/christmas/handlers"
 )
 
-func HandlerHomeRouter(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
+const filename string = "./comments.json"
 
-	w.Write([]byte("Hello"))
+func init() {
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		file, _ := os.Create(filename)
+		defer file.Close()
+		file.WriteString("[]")
+	}
 }
 
 func main() {
@@ -26,6 +28,9 @@ func main() {
 
 	http.Handle("/", templates)
 	http.Handle("/static/", http.StripPrefix("/static", static))
+
+	http.HandleFunc("/comment", handlers.HandlerCommentRouter)
+	http.HandleFunc("/comments", handlers.HandlerGetAllCommentRouter)
 
 	log.Println("The server is running in " + port)
 	http.ListenAndServe(":" + port, nil)

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commentários</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            color: #fff;
+            background-color: #ff0000;
+
+            height: 100dvh;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 3rem;
+            padding: 5rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            padding: 0 8%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 500px;
+        }
+
+        .container input {
+            padding: 13px 10px;
+            border-radius: 2px;
+            border: none;
+        }
+
+        .container button {
+            padding: 13px 10px;
+            border-radius: 2px;
+            border: none;
+            background-color: #fff;
+            color: #ff0000;
+            font-weight: bold;
+            font-size: .99rem;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Comentar</h1>
+
+    <form id="container" class="container">
+        <input type="text" placeholder="Seu País" required id="input-country">
+        <input type="text" placeholder="Seu comentário" required id="input-comment">
+        <button type="submit">Comentar</button>
+    </form>
+
+    <script>
+
+        document.querySelector("form").addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            fetch("/comment", {
+                method: "POST",
+                headers: { "Content-Type": "appliation/json" },
+                body: JSON.stringify({
+                    country: document.getElementById("input-country").value,
+                    comment: document.getElementById("input-comment").value
+                })
+            })
+                .finally(() => {
+                    window.location.href = "/"
+                })
+        });
+
+    </script>
+
+</body>
+
+</html>
